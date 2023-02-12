@@ -9,8 +9,10 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 class UserRepositoryImplTest {
     private UserRepository userRepository;
     private User user;
+    private UserRepositoryImpl userRepositoryImpl;
     @BeforeEach
     public void setUp(){
+        userRepositoryImpl = new UserRepositoryImpl();
         userRepository = new UserRepositoryImpl();
         user = new User();
         user.setFirstName("james");
@@ -38,7 +40,7 @@ class UserRepositoryImplTest {
         User foundUser = userRepository.findById(1);
         assertEquals(foundUser, savedUser);
     }
-    @Test public void saveTwoUser_findAllUser(){
+    @Test public void saveTwoUser_findAllUserTest(){
         userRepository.save(user);
         User newUser = new User();
         userRepository.save(newUser);
@@ -46,6 +48,30 @@ class UserRepositoryImplTest {
         assertEquals(2,newUser.getId());
         userRepository.findAll();
         assertEquals(2, userRepository.findAll().size());
+    }
+ @Test public void  saveOneUser_deleteOneUserByUserTest(){
+        userRepository.save(user);
+        User newUser = new User();
+        userRepository.save(newUser);
+        assertEquals(2, userRepository.count());
+        userRepository.deleteByUser(user);
+        assertEquals(1, userRepository.count());
+    }
+    @Test public void saveTwoUser_deleteOneUserByIdTest(){
+        userRepository.save(user);
+        User newUser = new User();
+        userRepository.save(newUser);
+        assertEquals(2, userRepository.count());
+        userRepository.deleteById(1);
+        assertEquals(1, userRepository.count());
+    }
+    @Test public void saveTwoUser_deleteAllUsersTest(){
+        userRepository.save(user);
+        User newUser = new User();
+        userRepository.save(newUser);
+        assertEquals(2, userRepository.count());
+        userRepository.deleteAll();
+        assertEquals(0, userRepository.count());
     }
 
 

@@ -3,6 +3,7 @@ package data.repositories;
 import data.model.User;
 
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.List;
 
 public class UserRepositoryImpl implements UserRepository {
@@ -13,7 +14,7 @@ public class UserRepositoryImpl implements UserRepository {
     public User save(User user) {
         boolean userHaveNotBeenSaved = user.getId() == 0;
         if (userHaveNotBeenSaved) {
-            user.setId(generateId());
+           saveNewUser(user);
             users.add(user);
             count++;
         }
@@ -22,7 +23,6 @@ public class UserRepositoryImpl implements UserRepository {
 
     private void saveNewUser(User user) {
         user.setId(generateId());
-        count++;
     }
 
     private int generateId() {
@@ -49,17 +49,33 @@ public class UserRepositoryImpl implements UserRepository {
     }
 
     @Override
-    public void delete(User user) {
-
+    public void deleteByUser(User user) {
+        for (User user1 : users) {
+            if (user.equals(user1)){
+                users.remove(user);
+                count--;
+                break;
+            }
+        }
     }
 
     @Override
-    public void delete(int id) {
-
+    public void deleteById(int id) {
+        for (User user2: users) {
+          if (user2.getId() == id){
+              users.remove(user2);
+              count--;
+              break;
+          }
+        }
     }
 
     @Override
     public void deleteAll() {
-
+        for (User user:users) {
+          users.removeAll(users);
+          count = users.size();
+          break;
+        }
     }
 }
