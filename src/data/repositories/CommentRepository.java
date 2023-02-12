@@ -8,4 +8,5 @@ public interface CommentRepository {
 
     void deleteComment(int id);
     Comment findCommentById(int id);
+    void deleteAllComment();
 }

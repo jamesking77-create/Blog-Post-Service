@@ -72,10 +72,8 @@ public class UserRepositoryImpl implements UserRepository {
 
     @Override
     public void deleteAll() {
-        for (User user:users) {
-          users.removeAll(users);
-          count = users.size();
-          break;
-        }
+        users.removeAll(users);
+        count = users.size();
+
     }
 }

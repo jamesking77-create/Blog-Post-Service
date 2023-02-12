@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CommentRepositoryImpl implements CommentRepository{
-    int count;
+  private   int count;
 
 
-    List<Comment> comments = new ArrayList<>();
+   private final List<Comment> comments = new ArrayList<>();
     @Override
     public Comment saveComment(Comment comment) {
         boolean commentIsNotSaved = comment.getId() == 0;
@@ -50,5 +50,12 @@ public class CommentRepositoryImpl implements CommentRepository{
             }
         }
         return null;
+    }
+
+    @Override
+    public void deleteAllComment() {
+        comments.removeAll(comments);
+        count = comments.size();
+
     }
 }
