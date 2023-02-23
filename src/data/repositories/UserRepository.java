@@ -12,4 +12,6 @@ public interface UserRepository {
     void deleteByUser(User user);
     void deleteById(int id);
     void deleteAll();
+
+    User findByUsername(String username);
 }

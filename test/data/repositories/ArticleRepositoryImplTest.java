@@ -7,8 +7,8 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 
 class ArticleRepositoryImplTest {
-Article article;
-ArticleRepository articleRepository;
+private Article article;
+private ArticleRepository articleRepository;
 @BeforeEach public void setUp(){
     article = new Article();
     articleRepository = new ArticleRepositoryImpl();

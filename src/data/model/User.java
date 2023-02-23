@@ -1,6 +1,9 @@
 package data.model;
 
+import java.time.temporal.TemporalAccessor;
+
 public class User {
+    public TemporalAccessor getDateRegistered;
     private int id;
     private String firstName;
     private String LastName;

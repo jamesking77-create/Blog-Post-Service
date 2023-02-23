@@ -6,6 +6,8 @@ public class Article {
     private int id;
     private String title;
     private String body;
+
+
     private final LocalDateTime now = LocalDateTime.now();
     private int authorId;
 
