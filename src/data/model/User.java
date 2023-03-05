@@ -1,14 +1,25 @@
 package data.model;
 
+import java.time.LocalDateTime;
 import java.time.temporal.TemporalAccessor;
 
 public class User {
-    public TemporalAccessor getDateRegistered;
+
     private int id;
     private String firstName;
     private String LastName;
     private String userName;
     private String password;
+    private LocalDateTime dateRegistered;
+
+    public LocalDateTime getDateRegistered() {
+        return dateRegistered = LocalDateTime.now();
+    }
+
+    public void setDateRegistered(LocalDateTime dateRegistered) {
+        this.dateRegistered = dateRegistered;
+
+    }
 
     public int getId() {
         return id;

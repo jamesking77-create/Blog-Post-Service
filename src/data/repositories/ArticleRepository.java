@@ -9,6 +9,8 @@ public interface ArticleRepository {
 
     Article findArticleByArticleId(int id);
 
+    Article findArticleByTitle(String title);
+
     void deleteAllArticle();
 
 }

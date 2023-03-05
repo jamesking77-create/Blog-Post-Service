@@ -2,6 +2,7 @@ package data.repositories;
 
 import data.model.User;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -75,5 +76,13 @@ public class UserRepositoryImpl implements UserRepository {
         users.removeAll(users);
         count = users.size();
 
+    }
+
+    @Override
+    public User findByUsername(String username) {
+        for (User user: users){
+         if (username.equals(user.getUserName())) return user;
+        }
+        return null;
     }
 }

@@ -3,11 +3,13 @@ import data.model.User;
 import dtos.Requests.RegisterRequest;
 import dtos.Responses.FindUserResponse;
 
+import java.util.List;
+
 public interface UserService {
     User register(RegisterRequest registerRequest);
-    User findUser(int id);
-
-    FindUserResponse findUsers(int id);
+    FindUserResponse findUser(int id);
+    String deleteUser(int id);
+    FindUserResponse findUserByUserName(String  username);
 
     //    Object register(RegisterRequest request);
 }

@@ -52,6 +52,14 @@ public class ArticleRepositoryImpl implements ArticleRepository{
     }
 
     @Override
+    public Article findArticleByTitle(String title) {
+        for (Article article: articles) {
+           if (title.equals(article.getTitle())) return article;
+        }
+        return null;
+    }
+
+    @Override
     public void deleteAllArticle() {
         articles.removeAll(articles);
         count = articles.size();

@@ -10,6 +10,7 @@ class UserRepositoryImplTest {
     private UserRepository userRepository;
     private User user;
     private UserRepositoryImpl userRepositoryImpl;
+
     @BeforeEach
     public void setUp(){
         userRepositoryImpl = new UserRepositoryImpl();
