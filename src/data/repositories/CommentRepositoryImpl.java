@@ -53,6 +53,11 @@ public class CommentRepositoryImpl implements CommentRepository{
     }
 
     @Override
+    public List<Comment> findAllComment() {
+        return comments;
+    }
+
+    @Override
     public void deleteAllComment() {
         comments.removeAll(comments);
         count = comments.size();

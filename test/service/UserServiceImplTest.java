@@ -5,12 +5,11 @@ import dtos.Requests.RegisterRequest;
 import dtos.Responses.FindUserResponse;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class UserServiceImplTest  {
     private  UserService userService;
-
-    private User user;
     private  RegisterRequest registerRequest;
     private RegisterRequest registerRequest2;
 
@@ -18,7 +17,6 @@ class UserServiceImplTest  {
         userService = new UserServiceImpl();
         registerRequest = new RegisterRequest();
         registerRequest2 = new RegisterRequest();
-        FindUserResponse userResponse = new FindUserResponse();
         registerRequest.setFirstName("james");
         registerRequest.setLastName("king");
         registerRequest.setPassword("0550");
@@ -56,6 +54,10 @@ class UserServiceImplTest  {
         assertEquals(2, secondUser.getId());
         FindUserResponse foundUser = userService.findUser(2);
         assertEquals(secondUser.getId(), foundUser.getUserId());
+    }
 
+    @Test public void registerTwoUserWithTheSameUsername_ThrowsExceptionTest(){
+        userService.register(registerRequest);
+        assertThrows(IllegalArgumentException.class, ()-> userService.register(registerRequest));
     }
 }

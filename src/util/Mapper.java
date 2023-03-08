@@ -1,15 +1,28 @@
 package util;
 
 import data.model.Article;
+import data.model.Comment;
 import data.model.User;
 import dtos.Requests.CreateNewArticleRequest;
+import dtos.Requests.CreateNewCommentRequest;
 import dtos.Requests.RegisterRequest;
 import dtos.Responses.FindArticleResponse;
+import dtos.Responses.FindCommentResponse;
 import dtos.Responses.FindUserResponse;
 import java.time.format.DateTimeFormatter;
 
 
+
 public class Mapper {
+
+        public static Comment map(CreateNewCommentRequest commentRequest){
+            Comment comment = new Comment();
+            comment.setComment(commentRequest.getBody());
+            comment.setId(commentRequest.getCommentId());
+            comment.setArticleId(commentRequest.getArticleId());
+            comment.setUserId(commentRequest.getAuthorId());
+            return comment;
+        }
         public static User map(RegisterRequest registerRequest){
             User user = new User();
             user.setFirstName(registerRequest.getFirstName());
@@ -42,7 +55,6 @@ public class Mapper {
             response.setDateRegistered(formatter.format(foundUser.getDateRegistered()));
         }
 
-
         public static void map(CreateNewArticleRequest createArticleRequest, Article article) {
             article.setBody(createArticleRequest.getBody());
             article.setTitle(createArticleRequest.getTitle());
@@ -53,5 +65,9 @@ public class Mapper {
             response.setTitle(foundArticle.getTitle());
             response.setBody(foundArticle.getBody());
         }
-    }
+
+        public static void map(Comment foundComment, FindCommentResponse response){
+            response.setBody(foundComment.getComment());
+        }
+}
 

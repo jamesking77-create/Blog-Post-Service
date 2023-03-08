@@ -69,5 +69,9 @@ class ArticleServiceImplTest {
         articleService.deleteArticle(2);
         assertEquals(1, articleService.count());
     }
+    @Test public void createTwoArticleWithSameTitle_ThrowsExceptionTest(){
+        articleService.createNewArticle(articleRequest2);
+        assertThrows(IllegalArgumentException.class, ()-> articleService.createNewArticle(articleRequest2));
+    }
 
 }

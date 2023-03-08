@@ -7,12 +7,17 @@ import dtos.Requests.CreateNewArticleRequest;
 import dtos.Responses.FindArticleResponse;
 import util.Mapper;
 
+import java.util.NoSuchElementException;
+
 public class ArticleServiceImpl implements  ArticleService{
 
     private  final ArticleRepository articleRepository = new ArticleRepositoryImpl();
+
+    UserService userService = new UserServiceImpl();
     private long count;
     @Override
     public Article createNewArticle(CreateNewArticleRequest createNewArticleRequest) {
+        checkIfAuthorExist(createNewArticleRequest.getAuthorId());
         if (articleExist(createNewArticleRequest.getTitle())) throw new IllegalArgumentException("Article with title " + createNewArticleRequest.getTitle() + " already exists");
         count++;
         return articleRepository.saveArticle(Mapper.map(createNewArticleRequest));
@@ -53,5 +58,10 @@ public class ArticleServiceImpl implements  ArticleService{
         count--;
         System.out.println("deleted");
         return "Article Deleted Successfully";
+    }
+
+    private void checkIfAuthorExist(int id){
+        var user = userService.findUser(id);
+        if (user == null) throw new NoSuchElementException("user doesn't exist");
     }
 }

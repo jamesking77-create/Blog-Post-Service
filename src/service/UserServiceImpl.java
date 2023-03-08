@@ -6,12 +6,11 @@ import data.repositories.UserRepositoryImpl;
 import dtos.Requests.RegisterRequest;
 import dtos.Responses.FindUserResponse;
 import util.Mapper;
-import java.time.format.DateTimeFormatter;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 
-    public class UserServiceImpl implements UserService {
+import java.util.NoSuchElementException;
+
+
+public class UserServiceImpl implements UserService {
         private final UserRepository userRepository = new UserRepositoryImpl();
 
         @Override
@@ -24,7 +23,7 @@ import java.util.Map;
         public FindUserResponse findUser(int id) {
             FindUserResponse userResponse = new FindUserResponse();
             User foundUser = userRepository.findById(id);
-            if (foundUser == null) throw new NullPointerException("user doesn't exist");
+            if (foundUser == null) throw new NoSuchElementException("user doesn't exist");
             Mapper.map(foundUser, userResponse);
             return userResponse;
         }
@@ -45,13 +44,13 @@ import java.util.Map;
         public FindUserResponse findUserByUserName(String userName) {
             FindUserResponse userResponse = new FindUserResponse();
             User foundUser = userRepository.findByUsername(userName);
-            if (foundUser == null) throw new NullPointerException("user doesn't exist");
+            if (foundUser == null) throw new NoSuchElementException("user doesn't exist");
             Mapper.map(foundUser, userResponse);
             return userResponse;
         }
 
 
-        private boolean userExist(String username) {
+        private  boolean userExist(String username) {
             User foundUser = userRepository.findByUsername(username);
             return foundUser != null;
         }

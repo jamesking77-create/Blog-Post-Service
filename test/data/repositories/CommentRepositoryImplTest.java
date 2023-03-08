@@ -61,4 +61,15 @@ class CommentRepositoryImplTest {
         commentRepository.deleteAllComment();
         assertEquals(0, commentRepository.countComment());
     }
+
+    @Test public void saveTwoComment_findAllComment(){
+        commentRepository.saveComment(comment);
+        assertEquals(1, commentRepository.countComment());
+        Comment comment1 = new Comment();
+        commentRepository.saveComment(comment1);
+        assertEquals(2, commentRepository.countComment());
+        commentRepository.findAllComment();
+        assertEquals(2, commentRepository.findAllComment().size());
+
+    }
 }
